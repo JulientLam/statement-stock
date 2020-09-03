@@ -8,16 +8,18 @@ import org.springframework.batch.item.ItemStreamReader;
 import org.springframework.batch.item.NonTransientResourceException;
 import org.springframework.batch.item.ParseException;
 import org.springframework.batch.item.UnexpectedInputException;
+import org.springframework.batch.item.file.ResourceAwareItemReaderItemStream;
+import org.springframework.core.io.Resource;
 
 import com.demo.domain.Customer;
 import com.demo.domain.Transaction;
 
-public class CustomerFileReader implements ItemStreamReader<Customer> {
+public class CustomerFileReader implements ResourceAwareItemReaderItemStream<Customer> {
 
 	private Object currentObject;
-	private ItemStreamReader<Object> delegate;
+	private ResourceAwareItemReaderItemStream<Object> delegate;
 
-	public void setDelegate(ItemStreamReader<Object> itemStreamReader) {
+	public void setDelegate(ResourceAwareItemReaderItemStream<Object> itemStreamReader) {
 		this.delegate = itemStreamReader;
 	}
 
@@ -58,6 +60,11 @@ public class CustomerFileReader implements ItemStreamReader<Customer> {
 	@Override
 	public void close() throws ItemStreamException {
 		delegate.close();
+	}
+
+	@Override
+	public void setResource(Resource resource) {
+		delegate.setResource(resource);
 	}
 
 }

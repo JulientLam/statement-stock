@@ -10,7 +10,6 @@ import org.springframework.batch.core.configuration.annotation.StepBuilderFactor
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.batch.item.file.MultiResourceItemReader;
-import org.springframework.batch.item.file.ResourceAwareItemReaderItemStream;
 import org.springframework.batch.item.file.mapping.FieldSetMapper;
 import org.springframework.batch.item.file.mapping.PatternMatchingCompositeLineMapper;
 import org.springframework.batch.item.file.transform.DelimitedLineTokenizer;
@@ -33,6 +32,18 @@ public class JobConfiguration {
 	@Autowired
 	private StepBuilderFactory stepBuilderFactory;
 	
+	@Value("classpath*:/data/customerTransaction*.csv")
+	private Resource[] resources;
+	
+	@Bean
+	public MultiResourceItemReader<Customer> multiResourceItemReader(){
+		MultiResourceItemReader<Customer> multiResourceReader = new MultiResourceItemReader<Customer>();
+		System.out.println(resources.length);
+		multiResourceReader.setResources(resources);
+		multiResourceReader.setDelegate(customerFileReader());
+		return multiResourceReader ;
+	}
+	
 	@Bean
 	public CustomerFileReader customerFileReader() {
 		CustomerFileReader fileReader = new CustomerFileReader();
@@ -45,7 +56,7 @@ public class JobConfiguration {
 	public FlatFileItemReader<Object> fileItemReader(){
 		FlatFileItemReader<Object> reader =new FlatFileItemReader<Object>();
 		
-		reader.setResource(new ClassPathResource("/data/customerTransaction.csv"));		
+//		reader.setResource(new ClassPathResource("/data/customerTransaction.csv"));		
 		PatternMatchingCompositeLineMapper lineMapper=new PatternMatchingCompositeLineMapper<>();
 				
 		DelimitedLineTokenizer tokenizerForCustomer =new DelimitedLineTokenizer();
@@ -86,14 +97,14 @@ public class JobConfiguration {
 	public Step step() {
 		return stepBuilderFactory.get("step1")
 				.<Object,Customer>chunk(1)
-				.reader(customerFileReader())
+				.reader(multiResourceItemReader())
 				.writer(itemWriter())
 				.build();
 	}
 	
 	@Bean
 	public Job job() {
-		return jobBuilderFactory.get("job6")
+		return jobBuilderFactory.get("job7")
 				.start(step())
 				.build();
 	}
