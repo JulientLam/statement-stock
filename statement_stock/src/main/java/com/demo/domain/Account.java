@@ -10,7 +10,7 @@ import lombok.Setter;
 public class Account {
 	private long id = -1;
 	private String accountNumber;
-	private Customer cust;
+	private Customer customer;
 	private BigDecimal cashBalance;
 	private PricingTier tier;
 	private List<Transaction> transactions;
