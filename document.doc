@@ -1,8 +1,0 @@
-
-1. Format file customerTransaction.csv
-- Information of customer format:
-
-NameRequiredFormat	DescriptionCustomer tax idTrue\d{9}This tax id number is unique for each customer. Although it isn’t the primary key for the Customer table, it can be used to look up unique customersCustomer First NameFalse\w+Customer Last NameFalse \w+Customer Address 1False\w+Customer CityFalse \w+Customer State False [A-Z]{2}Customer Zip False\d{4}The postal code for the customerCustomer Account NumberFalse \d{16}The identifying number for the customer’s account
-- Information of transaction format:
-
-NameRequiredFormatDescriptionCustomer Account NumberTrue\d{16}Stock SymbolTrue\w+The stock symbol for this transaction. This is used later to obtain the current price for the stock.Quantity True\d+The price of the stock when it was traded.Price True\d+\.\d{2}The number of shares traded. Positive numbers mean the shares were purchased; negative numbers indicate they were sold.Transaction TimestampTrueMM\DD\YYYY hh:mm:ss.ssThe date and time when the transaction was executed.

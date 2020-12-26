@@ -1,4 +1,0 @@
-
-1. Format file customerTransaction.csv
-
-NameRequiredFormat	DescriptionCustomer tax idTrue\d{9}This tax id number is unique for each customer. Although it isn’t the primary key for the Customer table, it can be used to look up unique customersCustomer First NameFalse\w+Customer Last NameFalse \w+Customer Address 1False\w+Customer CityFalse \w+Customer State False [A-Z]{2}Customer Zip False\d{4}The postal code for the customerCustomer Account NumberFalse \d{16}The identifying number for the customer’s account
