@@ -1,0 +1,5 @@
+Tier Trades Fee per Transaction
+I      	<=1,000				$9 + .1% of the purchase price
+II  	1,001: 100,000 		$3
+III 	100,001: 1,000,000 	$2
+IV 		> 1,000,000 		$1 
