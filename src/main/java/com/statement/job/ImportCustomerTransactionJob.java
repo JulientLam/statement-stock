@@ -382,8 +382,8 @@ public class ImportCustomerTransactionJob {
 //		JavaMailSenderImpl impl = new JavaMailSenderImpl();
 //		impl.setHost("smtp.gmail.com");
 //		impl.setPort(587);
-//		impl.setPassword("Huong!2345");
-//		impl.setUsername("huonglam.julient@gmail.com");
+//		impl.setPassword("");
+//		impl.setUsername("");
 ////		Properties javaMailProperties = impl.getJavaMailProperties();
 ////		javaMailProperties.put("mail.transport.protocol", "smtp");
 ////		javaMailProperties.put("mail.smtp.auth", "true");
